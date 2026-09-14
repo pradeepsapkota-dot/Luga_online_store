@@ -20,8 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function StoreDetailPage({ params }: Props) {
-  const store = stores.find(async (s) => s.slug === (await params).slug);
+export default async function StoreDetailPage({ params }: Props) {
+  const { slug } = await params;
+  const store = stores.find((s) => s.slug === slug);
 
   if (!store) {
     notFound();
